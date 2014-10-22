@@ -1,13 +1,16 @@
 package players;
 import TTT.GameState;
+import TTT.StateProcessor;
 import TTT.TreeGenerator;
 
 /**
  * Created by Alex Codreanu on 10/15/14.
  */
 public class AI extends Player {
+    private StateProcessor stateProcessor;
     public AI(String symbol) {
         setSymbol(symbol);
+        this.stateProcessor = new StateProcessor(symbol);
     }
 
     public int nextMove(GameState state) {
@@ -41,7 +44,7 @@ public class AI extends Player {
     private GameState stateWithSmallestScore(GameState state) {
         GameState nextState = state.nextPossibleStates.get(0);
         for (GameState possibleState: state.nextPossibleStates) {
-            if (possibleState.score(0) < nextState.score(0)){
+            if (stateProcessor.score(0,possibleState) < stateProcessor.score(0,nextState)){
                 nextState = possibleState;
             }
         }
@@ -49,6 +52,6 @@ public class AI extends Player {
     }
 
     private void generateStatesTree(GameState state) {
-        new TreeGenerator(getSymbol()).generate(state);
+        new TreeGenerator().generate(state);
     }
 }

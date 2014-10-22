@@ -1,9 +1,7 @@
 package TTT;
 
 import org.junit.Test;
-
 import java.util.Arrays;
-
 import static org.junit.Assert.*;
 
 /**
@@ -89,8 +87,8 @@ public class GameStateTest {
     @Test
     public void isGameOverReturnsTrueWhenThereAreNoMoreMovesLeft() {
         String[] board = new String[]{"X", "O", "X",
-                "X", "O", "O",
-                "O", "X", "X"};
+                                      "X", "O", "O",
+                                      "O", "X", "X"};
         GameState state = new GameState(board, "X");
         assertTrue(state.isGameOver());
     }

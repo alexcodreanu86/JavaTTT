@@ -16,20 +16,13 @@ public class GameState {
             new int[] {3, 4, 5},
             new int[] {6, 7, 8}
     };
-    private String winner, aiSymbol;
     public String[] board;
-    public String playerSymbol;
+    public String playerSymbol, winner;
     public List<GameState> nextPossibleStates =  new ArrayList<GameState>();
 
     public GameState(String[] board, String playerSymbol) {
         this.board        = board;
         this.playerSymbol = playerSymbol;
-    }
-
-    public GameState(String[] board, String playerSymbol, String aiSymbol) {
-        this.board          = board;
-        this.playerSymbol   = playerSymbol;
-        this.aiSymbol       = aiSymbol;
     }
 
     public List<Integer> possibleMoves() {
@@ -49,15 +42,15 @@ public class GameState {
         this.board[position] = playerSymbol;
     }
 
-    public boolean isAvailableChoice(int possition) {
-        return board[possition] == null;
+    public boolean isAvailableChoice(int position) {
+        return board[position] == null;
     }
 
     public boolean isGameOver() { return hasWinner() || isBoardFull(); }
 
     public boolean isBoardFull() { return possibleMoves().size() == 0; }
 
-    private boolean hasWinner() {
+    public boolean hasWinner() {
         boolean hasWinner = false;
         for (int[] combo : WINNING_COMBINATIONS) {
             if (isWinningCombo(combo)) {
@@ -74,37 +67,5 @@ public class GameState {
 
     private boolean isWinningCombo(int[] combo) {
         return board[combo[0]] != null && board[combo[0]] == board[combo[1]] && board[combo[0]] == board[combo[2]];
-    }
-
-    public int score(int depth) {
-        if (hasWinner()){
-            if (getWinner() == aiSymbol){
-                return depth - 10;
-            } else {
-                return 10 - depth;
-            }
-        } else if(isBoardFull()){
-            return 0;
-        } else {
-            return nextRoundScore(depth + 1, this.nextPlayerSymbol());
-        }
-    }
-
-    public int nextRoundScore(int depth, String player) {
-        List<Integer> scores = nextRoundSortedScores(depth);
-        if (player != aiSymbol) {
-            return scores.get(0);
-        } else {
-            return scores.get(scores.size() - 1);
-        }
-    }
-
-    public List<Integer> nextRoundSortedScores(int depth) {
-        List<Integer> scores = new ArrayList<Integer>();
-        for (GameState state : nextPossibleStates) {
-            scores.add(state.score(depth));
-        }
-        Collections.sort(scores);
-        return scores;
     }
 }

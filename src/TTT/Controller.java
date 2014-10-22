@@ -25,22 +25,22 @@ public class Controller {
         this.board = board;
     }
 
-    public void setDependencies() {
-        this.view          = new View(newScanner(in), out);
-        this.factory       = new Factory(view);
+    public void startGame() {
+        setDependencies();
+        initializePlayers();
+        newGameRunner(player1, player2, view, board).start();
     }
 
-    public void startGame() {
-       setDependencies();
-       initializePlayers();
-       newGameRunner(player1, player2, view, board).start();
+    private void setDependencies() {
+        this.view          = new View(newScanner(in), out);
+        this.factory       = new Factory(view);
     }
 
     public GameRunner newGameRunner(Player player1, Player player2, View view, String[] board) {
         return new GameRunner(player1, player2, view, board);
     }
 
-    public Scanner newScanner(InputStream input) {
+    private Scanner newScanner(InputStream input) {
         return new Scanner(input);
     }
 

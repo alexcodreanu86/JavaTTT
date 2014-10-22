@@ -1,9 +1,6 @@
 package TTT;
 
 import org.junit.Test;
-
-import java.util.Scanner;
-
 import static org.junit.Assert.*;
 
 /**
@@ -16,7 +13,7 @@ public class TreeGeneratorTest {
                                         "X", "O", "X",
                                         "X", "O", null};
         GameState state = new GameState(board, "X");
-        TreeGenerator generator = new TreeGenerator("X");
+        TreeGenerator generator = new TreeGenerator();
         generator.generate(state);
         assertEquals(state.nextPossibleStates.size(), 1);
     }
@@ -27,7 +24,7 @@ public class TreeGeneratorTest {
                                         null, null, "X",
                                         null, "O", null};
         GameState state = new GameState(board, "X");
-        TreeGenerator generator = new TreeGenerator("X");
+        TreeGenerator generator = new TreeGenerator();
         generator.generate(state);
         assertEquals(state.nextPossibleStates.size(), 6);
     }

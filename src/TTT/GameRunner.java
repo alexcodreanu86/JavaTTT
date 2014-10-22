@@ -37,13 +37,13 @@ public class GameRunner {
         }
     }
 
-    public void makePlayerMove(GameState state) {
+    private void makePlayerMove(GameState state) {
         view.displayPlayerTurn(currentPlayer.getSymbol());
         view.displayBoard(state.board);
         state.setChoice(currentPlayer.nextMove(state));
     }
 
-    public void switchPlayers() {
+    private void switchPlayers() {
         if (currentPlayer == player1) {
             currentPlayer = player2;
         } else {

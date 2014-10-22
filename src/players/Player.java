@@ -5,7 +5,7 @@ import TTT.GameState;
  * Created by Alex Codreanu on 10/15/14.
  */
 public abstract class Player {
-    String symbol;
+    private String symbol;
     public abstract int nextMove(GameState gameState);
 
     public String getSymbol() {

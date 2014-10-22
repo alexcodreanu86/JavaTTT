@@ -4,21 +4,25 @@ package TTT;
  * Created by Alex Codreanu on 10/14/14.
  */
 public class Templates {
+    private static final String rowSeparator    = "\n_____\n";
+    private static final String emptySlot       = " ";
+    private static final String columnSeparator = "|";
+
     public static String renderBoard(String[] board) {
         String boardDisplay = "";
         for (int i = 0; i < board.length; i++) {
             if (isEndOfLine(i)) {
-                boardDisplay += "\n_____\n";
+                boardDisplay += rowSeparator;
             }
 
             if (board[i] != null) {
                 boardDisplay += board[i];
             } else {
-                boardDisplay += " ";
+                boardDisplay += emptySlot;
             }
 
             if (needsDivider(i)) {
-                boardDisplay += "|";
+                boardDisplay += columnSeparator;
             }
         }
         return boardDisplay;
